@@ -14,6 +14,8 @@ function saveQuotes() {
   console.log("Quotes saved to local storage");
 }
 
+document.querySelector("").addEventListener("click", saveQuotes);
+
 // 2. Input MSRP, Down Payment, and Loan Term
 let MSRP;
 let downPayment;
