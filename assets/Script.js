@@ -16,7 +16,7 @@ function saveQuotes() {
   console.log("Quotes saved to local storage");
 }
 
-document.querySelector("").addEventListener("click", saveQuotes);
+// document.querySelector("").addEventListener("click", saveQuotes);
 
 // 2. Input MSRP, Down Payment, and Loan Term
 let MSRP;
@@ -48,8 +48,24 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 4. View difference over loan term between base monthly cost and highest quote
-const savedQuoteOne = localStorage.getItem("quoteOne"); // work with one quote to start
-const savedQuoteTwo = localStorage.getItem("quoteTwo");
-const savedQuoteThree = localStorage.getItem("quoteThree");
+const savedQuoteOne = JSON.parse(localStorage.getItem("quoteOne")); // work with one quote to start
+const savedQuoteTwo = JSON.parse(localStorage.getItem("quoteTwo"));
+const savedQuoteThree = JSON.parse(localStorage.getItem("quoteThree"));
 
+const priceComparison = savedQuoteOne * loanTerm - baseCost * loanTerm; // only uses first quote to start
+
+function addPriceComparison() {
+  const priceComparisonText = document.createElement("p");
+  priceComparisonText.textContent = `You could overpay by as much as: $${priceComparison.toFixed(
+    2
+  )} over the course of the loan`;
+
+  priceComparisonText.appendChild(priceComparisonText); // check correct method of appending
+  const priceComparisonTextInsert = document.getElementById("cost-difference");
+  document.body.insertBefore(priceComparisonText, priceComparisonTextContent);
+}
+addPriceComparison();
+
+// const priceComparisonTest = 500 * 72 - 400 * 72; // test inputs for price comparison
+// console.log(priceComparisonTest);
 // 5. View suggestions for additional costs on button click with tooltip
