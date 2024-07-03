@@ -2,21 +2,24 @@
 
 // Perform data validation on inputs
 
-// 1. Collect up to three third-party quotes (optional)
+// 1. Function to save quotes to local storage
 function saveQuotes() {
-  const quoteOneStored = document.querySelector("").value.trim(); // work with one quote to start
+  const quoteOneStored = document
+    .getElementById("third-party-quote1")
+    .value.trim();
+  const quoteTwoStored = document
+    .getElementById("third-party-quote2")
+    .value.trim();
+  const quoteThreeStored = document
+    .getElementById("third-party-quote3")
+    .value.trim();
+
   localStorage.setItem("quoteOne", JSON.stringify(quoteOneStored));
-
-  const quoteTwoStored = document.querySelector("").value.trim();
   localStorage.setItem("quoteTwo", JSON.stringify(quoteTwoStored));
-
-  const quoteThreeStored = document.querySelector("").value.trim();
   localStorage.setItem("quoteThree", JSON.stringify(quoteThreeStored));
 
   console.log("Quotes saved to local storage");
 }
-
-// document.querySelector("").addEventListener("click", saveQuotes);
 
 // 2. Input MSRP, Down Payment, and Loan Term
 let MSRP;
@@ -52,20 +55,21 @@ const savedQuoteOne = JSON.parse(localStorage.getItem("quoteOne")); // work with
 const savedQuoteTwo = JSON.parse(localStorage.getItem("quoteTwo"));
 const savedQuoteThree = JSON.parse(localStorage.getItem("quoteThree"));
 
-const priceComparison = savedQuoteOne * loanTerm - baseCost * loanTerm; // only uses first quote to start
+const priceComparison = savedQuoteOne * loanTerm - baseCost * loanTerm; // using only first quote for now
+console.log(priceComparison);
+// function addPriceComparison() {
+//   const priceComparisonText = document.createElement("p");
+//   priceComparisonText.textContent = `You could overpay by as much as: $${priceComparison.toFixed(
+//     2
+//   )} over the course of the loan`;
 
-function addPriceComparison() {
-  const priceComparisonText = document.createElement("p");
-  priceComparisonText.textContent = `You could overpay by as much as: $${priceComparison.toFixed(
-    2
-  )} over the course of the loan`;
-
-  priceComparisonText.appendChild(priceComparisonText); // check correct method of appending
-  const priceComparisonTextInsert = document.getElementById("cost-difference");
-  document.body.insertBefore(priceComparisonText, priceComparisonTextContent);
-}
-addPriceComparison();
+//   priceComparisonText.appendChild(priceComparisonText); // check correct method of appending
+//   const priceComparisonTextInsert = document.getElementById("cost-difference");
+//   document.body.insertBefore(priceComparisonText, priceComparisonTextContent);
+// }
+// addPriceComparison();
 
 // const priceComparisonTest = 500 * 72 - 400 * 72; // test inputs for price comparison
 // console.log(priceComparisonTest);
+
 // 5. View suggestions for additional costs on button click with tooltip
