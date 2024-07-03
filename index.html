@@ -36,7 +36,7 @@
           <input
             type="text"
             class="car-price"
-            id="carPrice"
+            id="car-price"
             placeholder="48,000"
           />
         </div>
@@ -45,23 +45,28 @@
           <input
             type="text"
             class="down-payment"
-            id="downPayment"
+            id="down-payment"
             placeholder="9,600"
           />
         </div>
         <div class="form-group">
           <label for="loan-term">Loan Term (months)</label>
-          <input type="text" class="loan-term" id="loanTerm" placeholder="72" />
+          <input
+            type="text"
+            class="loan-term"
+            id="loan-term"
+            placeholder="72"
+          />
         </div>
         <button type="submit" class="btn btn-primary">Calculate</button>
       </form>
     </main>
     <aside>
       <h4>Monthly Payment:</h4>
-      <p id="monthlyPayment"><span id="costSuggestion"></span></p>
+      <p id="monthly-payment"></p>
       <p>at 0% interest.</p>
       <!-- The difference between the highest monthly quote and the 0% monthly payment, if applicable -->
-      <p id="costDifference"></p>
+      <p id="cost-difference"></p>
       <!-- If applicable, button will show suggestions as a tooltip on click -->
     </aside>
     <script
@@ -69,5 +74,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="./assets/Script.js"></script>
   </body>
 </html>
