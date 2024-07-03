@@ -2,6 +2,10 @@
 
 // 1. Collect up to three third-party quotes (optional)
 
+localStorage.setItem("quote-1");
+localStorage.setItem("quote-2");
+localStorage.setItem("quote-3");
+
 // 2. Input MSRP, Down Payment, and Loan Term
 let MSRP;
 let downPayment;
@@ -32,5 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 4. View difference over loan term between base monthly cost and highest quote
+const quoteOne = localStorage.getItem("quote-1");
+const quoteTwo = localStorage.getItem("quote-2");
+const quoteThree = localStorage.getItem("quote-3");
 
 // 5. View suggestions for additional costs on button click with tooltip
