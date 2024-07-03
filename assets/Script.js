@@ -9,3 +9,12 @@ const MSRP = document.getElementById("");
 // 4. View difference over loan term between base monthly cost and highest quote
 
 // 5. View suggestions for additional costs on button click with tooltip
+const slider = document.getElementById('loanTermRange');
+const output = document.getElementById('loanTermValue');
+const sliderLabels = document.getElementById('sliderLabels');
+
+slider.addEventListener('input', function() {
+  output.textContent = slider.value;
+  updateSliderLabels();
+});
+
