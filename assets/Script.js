@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(`Down Payment: $${downPayment}`);
     console.log(`Loan Term: ${loanTerm}`);
 
+    // 3. View base monthly cost
     baseCost = (MSRP - downPayment) / loanTerm;
     console.log(`Base Monthly Cost: $${baseCost.toFixed(2)}`);
 
@@ -29,7 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     monthlyPayment.textContent = `$${baseCost.toFixed(2)}`;
   });
 });
-// 3. View base monthly cost
 
 // 4. View difference over loan term between base monthly cost and highest quote
 
