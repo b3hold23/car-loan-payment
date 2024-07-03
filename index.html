@@ -9,6 +9,8 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="./assets/style.css">
+
     <title>Car Loan Payment Calculator</title>
   </head>
   <body>
@@ -54,6 +56,16 @@
           <input type="text" class="loan-term" id="loanTerm" placeholder="72" />
         </div>
         <button type="submit" class="btn btn-primary">Calculate</button>
+
+        <button id="modalBtn">Add quotes</button>
+        
+        <div id="myModal" class="modal">
+          <div class="modal-content">
+            <span id="window-close">&times;</span>
+            <p>Modal</p>
+          </div>
+          
+        </div>
       </form>
     </main>
     <aside>
@@ -69,5 +81,6 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="./assets/Script.js"></script>
   </body>
 </html>
