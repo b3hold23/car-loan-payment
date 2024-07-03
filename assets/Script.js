@@ -1,15 +1,17 @@
 // Pseudocode
 
+// Perform data validation on inputs
+
 // 1. Collect up to three third-party quotes (optional)
 function saveQuotes() {
-  const quoteOneStored = document.querySelector("").value;
-  localStorage.setItem("quoteOne", quoteOneStored);
+  const quoteOneStored = document.querySelector("").value.trim(); // work with one quote to start
+  localStorage.setItem("quoteOne", JSON.stringify(quoteOneStored));
 
-  const quoteTwoStored = document.querySelector("").value;
-  localStorage.setItem("quoteTwo", quoteTwoStored);
+  const quoteTwoStored = document.querySelector("").value.trim();
+  localStorage.setItem("quoteTwo", JSON.stringify(quoteTwoStored));
 
-  const quoteThreeStored = document.querySelector("").value;
-  localStorage.setItem("quoteThree", quoteThreeStored);
+  const quoteThreeStored = document.querySelector("").value.trim();
+  localStorage.setItem("quoteThree", JSON.stringify(quoteThreeStored));
 
   console.log("Quotes saved to local storage");
 }
@@ -46,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 // 4. View difference over loan term between base monthly cost and highest quote
-const quoteOneStored = localStorage.getItem("quoteOne");
-const quoteTwoStored = localStorage.getItem("quoteTwo");
-const quoteThreeStored = localStorage.getItem("quoteThree");
+const savedQuoteOne = localStorage.getItem("quoteOne"); // work with one quote to start
+const savedQuoteTwo = localStorage.getItem("quoteTwo");
+const savedQuoteThree = localStorage.getItem("quoteThree");
 
 // 5. View suggestions for additional costs on button click with tooltip
