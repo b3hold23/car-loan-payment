@@ -10,7 +10,10 @@ function saveQuotes() {
 
   const quoteThreeStored = document.querySelector("").value;
   localStorage.setItem("quoteThree", quoteThreeStored);
+
+  console.log("Quotes saved to local storage");
 }
+
 // 2. Input MSRP, Down Payment, and Loan Term
 let MSRP;
 let downPayment;
