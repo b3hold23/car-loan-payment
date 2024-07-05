@@ -30,3 +30,13 @@ window.addEventListener("load", function () {
     document.getElementById("loan-term").value = savedLoanTerm;
   }
 });
+
+// Calculate and display monthly payment
+window.addEventListener("load", function () {
+  if (monthlyPayment) {
+    let displayPayment = document.getElementById("monthly-payment-display");
+    displayPayment.textContent = `Monthly Payment: $${monthlyPayment.toFixed(
+      2
+    )} at 0% interest.`;
+  }
+});
