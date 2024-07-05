@@ -71,3 +71,17 @@ window.addEventListener("load", function () {
     tipButton.addEventListener("click", showTips);
   }
 });
+
+function showTips() {
+  let showTipsContainer = document.getElementById("show-tips-container");
+
+  let existingTips = document.getElementById("show-tips");
+  if (existingTips) {
+    return;
+  }
+
+  let showTips = document.createElement("p");
+  showTips.setAttribute("id", "show-tips");
+  showTips.textContent = `Check the market adjustment, loan charges, add-ons, service charges, and sales tax.`;
+  showTipsContainer.appendChild(showTips);
+}
