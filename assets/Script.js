@@ -40,3 +40,19 @@ window.addEventListener("load", function () {
     )} at 0% interest.`;
   }
 });
+
+// calculate and display difference between monthly payment and quote
+// note: "quote" variale to accept to modal input(s)
+window.addEventListener("load", function () {
+  let quote = 800;
+  if (monthlyPayment) {
+    let displayDifference = document.getElementById(
+      "monthly-difference-display"
+    );
+    let savedPaymentValue = parseFloat(monthlyPayment);
+    let difference = quote - savedPaymentValue;
+    displayDifference.textContent = `You could be overpaying by as much as: $${difference.toFixed(
+      2
+    )} p/m.`;
+  }
+});
