@@ -151,6 +151,7 @@ window.addEventListener("load", function () {
     );
     let tipButton = this.document.createElement("button");
     tipButton.setAttribute("id", "tips-button");
+    tipButton.setAttribute("class", "btn btn-primary");
     tipButton.textContent = `Tips`;
     tipButtonContainer.appendChild(tipButton);
 
