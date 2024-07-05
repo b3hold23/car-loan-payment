@@ -8,6 +8,82 @@ document
     submitInputs();
   });
 
+// validate the form
+
+// note: all alerts to be changed to modals
+function validateForm(event) {
+  let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
+  let downPaymentInput = document.getElementById("down-payment").value.trim();
+  let loanTermInput = document.getElementById("loan-term").value.trim();
+
+  if (vehiclePriceInput === "") {
+    alert("Please enter the Vehicle Price or MSRP");
+    event.preventDefault();
+    return false;
+  }
+
+  if (isNaN(vehiclePriceInput)) {
+    alert("Please enter the Vehicle Price or MSRP as a number");
+    event.preventDefault();
+    return false;
+  }
+
+  let parsedVehiclePriceInput = parseFloat(vehiclePriceInput);
+  if (parsedVehiclePriceInput <= 0) {
+    alert("Please enter a positive number for the Vehicle Price or MSRP");
+    event.preventDefault();
+    return false;
+  }
+
+  let formattedVehiclePrice = parsedVehiclePriceInput.toFixed(2);
+  document.getElementById("vehicle-price").value = formattedVehiclePrice;
+
+  if (downPaymentInput === "") {
+    alert("Please enter the Down Payment or enter 0");
+    event.preventDefault();
+    return false;
+  }
+
+  if (isNaN(downPaymentInput)) {
+    alert("Please enter the Down Payment as a number");
+    event.preventDefault();
+    return false;
+  }
+
+  let parsedDownPaymentInput = parseFloat(downPaymentInput);
+  if (parsedDownPaymentInput <= 0) {
+    alert("Please enter a positive number for the Down Payment");
+    event.preventDefault();
+    return false;
+  }
+
+  let formattedDownPayment = parsedDownPaymentInput.toFixed(2);
+  document.getElementById("down-payment").value = formattedDownPayment;
+
+  if (loanTermInput === "") {
+    alert("Please enter the Loan Term");
+    event.preventDefault();
+    return false;
+  }
+
+  if (isNaN(loanTermInput)) {
+    alert("Please enter the Loan Term as a number");
+    event.preventDefault();
+    return false;
+  }
+
+  let parsedLoanTermInput = parseFloat(loanTermInput);
+  if (parsedLoanTermInput <= 0) {
+    alert("Please enter a positive number for the Loan Term");
+    event.preventDefault();
+    return false;
+  }
+
+  document.getElementById("loan-term").value = parsedLoanTermInput;
+
+  return true;
+}
+
 // set inputs to local storage
 function submitInputs() {
   let vehiclePrice = document.getElementById("vehicle-price").value;
