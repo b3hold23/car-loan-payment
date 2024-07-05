@@ -1,3 +1,13 @@
+// Add event listener to submit button
+document
+  .getElementById("submit-button")
+  .addEventListener("click", function (event) {
+    if (!validateForm(event)) {
+      return;
+    }
+    submitInputs();
+  });
+
 // set inputs to local storage
 function submitInputs() {
   let vehiclePrice = document.getElementById("vehicle-price").value;
