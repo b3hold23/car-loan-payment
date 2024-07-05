@@ -56,3 +56,18 @@ window.addEventListener("load", function () {
     )} p/m.`;
   }
 });
+
+// create button to show suggestions with tooltip
+window.addEventListener("load", function () {
+  if (monthlyPayment) {
+    let tipButtonContainer = document.getElementById(
+      "tooltip-button-container"
+    );
+    let tipButton = this.document.createElement("button");
+    tipButton.setAttribute("id", "tips-button");
+    tipButton.textContent = `Tips`;
+    tipButtonContainer.appendChild(tipButton);
+
+    tipButton.addEventListener("click", showTips);
+  }
+});
