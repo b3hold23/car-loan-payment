@@ -121,9 +121,9 @@ window.addEventListener("load", function () {
 window.addEventListener("load", function () {
   if (monthlyPayment) {
     let displayPayment = document.getElementById("monthly-payment-display");
-    displayPayment.textContent = `Monthly Payment: $${monthlyPayment.toFixed(
+    displayPayment.innerHTML = `<strong>Monthly Payment:</strong><br><br> $${monthlyPayment.toFixed(
       2
-    )} at 0% interest.`;
+    )}<br><br> at 0% interest.`;
   }
 });
 
@@ -137,9 +137,9 @@ window.addEventListener("load", function () {
     );
     let savedPaymentValue = parseFloat(monthlyPayment);
     let difference = quote - savedPaymentValue;
-    displayDifference.textContent = `You could be overpaying by as much as: $${difference.toFixed(
+    displayDifference.innerHTML = `You could be overpaying by as much as:<br><br><strong>$${difference.toFixed(
       2
-    )} p/m.`;
+    )} p/m.</bold>`;
   }
 });
 
