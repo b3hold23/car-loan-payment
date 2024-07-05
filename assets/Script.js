@@ -15,3 +15,18 @@ let savedVehiclePrice = this.localStorage.getItem("vehicle-price");
 let savedDownPayment = this.localStorage.getItem("down-payment");
 let savedLoanTerm = this.localStorage.getItem("loan-term");
 let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
+
+// display the figures in the form boxes
+window.addEventListener("load", function () {
+  if (savedVehiclePrice) {
+    document.getElementById("vehicle-price").value = savedVehiclePrice;
+  }
+
+  if (savedDownPayment) {
+    document.getElementById("down-payment").value = savedDownPayment;
+  }
+
+  if (savedLoanTerm) {
+    document.getElementById("loan-term").value = savedLoanTerm;
+  }
+});
