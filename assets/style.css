@@ -87,11 +87,18 @@ aside {
   justify-content: center;
 }
 
+.monthly-payment-toggle {
+  display: none;
+}
+
 #monthly-payment-container {
-  display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 10px;
+  padding-top: 10px;
+  background-color: var(--skobeloff);
+  color: var(--ghost-white);
+  max-height: 460px; /* consider alternative */
 }
 
 #monthly-payment-display {
@@ -126,6 +133,15 @@ aside {
     flex: none;
     width: 100%;
     margin-bottom: 20px;
+    text-align: center;
+  }
+
+  form :placeholder-shown {
+    text-align: center;
+  }
+
+  .center-form-input {
+    text-align: center;
   }
 
   aside {

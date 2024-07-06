@@ -8,6 +8,17 @@ document
     submitInputs();
   });
 
+// add event listener to show output box on submit
+document
+  .getElementById("submit-button")
+  .addEventListener("click", function (event) {
+    event.preventDefault();
+    const monthlyPaymentElement = document.getElementById(
+      "monthly-payment-container"
+    );
+    monthlyPaymentElement.classList.remove("monthly-payment-toggle");
+  });
+
 // validate the form
 
 // note: all alerts to be changed to modals
