@@ -1,27 +1,15 @@
-// Add event listener to submit button
 document
   .getElementById("submit-button")
   .addEventListener("click", function (event) {
-    if (!validateForm(event)) {
-      return;
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+    if (validateForm(event)) {
+      submitInputs();
+      updateMonthlyPayment();
+      showMonthlyPaymentContainer();
     }
-    submitInputs();
   });
 
-// add event listener to show output box on submit
-document
-  .getElementById("submit-button")
-  .addEventListener("click", function (event) {
-    event.preventDefault();
-    const monthlyPaymentElement = document.getElementById(
-      "monthly-payment-container"
-    );
-    monthlyPaymentElement.classList.remove("monthly-payment-toggle");
-  });
-
-// validate the form
-
-// note: all alerts to be changed to modals
+// Validate the form
 function validateForm(event) {
   let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
   let downPaymentInput = document.getElementById("down-payment").value.trim();
@@ -29,73 +17,45 @@ function validateForm(event) {
 
   if (vehiclePriceInput === "") {
     alert("Please enter the Vehicle Price or MSRP");
-    event.preventDefault();
     return false;
   }
 
-  if (isNaN(vehiclePriceInput)) {
-    alert("Please enter the Vehicle Price or MSRP as a number");
-    event.preventDefault();
-    return false;
-  }
-
-  let parsedVehiclePriceInput = parseFloat(vehiclePriceInput);
-  if (parsedVehiclePriceInput <= 0) {
+  if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
     alert("Please enter a positive number for the Vehicle Price or MSRP");
-    event.preventDefault();
     return false;
   }
 
-  let formattedVehiclePrice = parsedVehiclePriceInput.toFixed(2);
+  let formattedVehiclePrice = parseFloat(vehiclePriceInput).toFixed(2);
   document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
   if (downPaymentInput === "") {
     alert("Please enter the Down Payment or enter 0");
-    event.preventDefault();
     return false;
   }
 
-  if (isNaN(downPaymentInput)) {
-    alert("Please enter the Down Payment as a number");
-    event.preventDefault();
-    return false;
-  }
-
-  let parsedDownPaymentInput = parseFloat(downPaymentInput);
-  if (parsedDownPaymentInput <= 0) {
+  if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
     alert("Please enter a positive number for the Down Payment");
-    event.preventDefault();
     return false;
   }
 
-  let formattedDownPayment = parsedDownPaymentInput.toFixed(2);
+  let formattedDownPayment = parseFloat(downPaymentInput).toFixed(2);
   document.getElementById("down-payment").value = formattedDownPayment;
 
-  if (loanTermInput === "") {
-    alert("Please enter the Loan Term");
-    event.preventDefault();
-    return false;
-  }
-
-  if (isNaN(loanTermInput)) {
-    alert("Please enter the Loan Term as a number");
-    event.preventDefault();
-    return false;
-  }
-
-  let parsedLoanTermInput = parseFloat(loanTermInput);
-  if (parsedLoanTermInput <= 0) {
+  if (
+    loanTermInput === "" ||
+    isNaN(loanTermInput) ||
+    parseFloat(loanTermInput) <= 0
+  ) {
     alert("Please enter a positive number for the Loan Term");
-    event.preventDefault();
     return false;
   }
 
-  document.getElementById("loan-term").value = parsedLoanTermInput;
+  document.getElementById("loan-term").value = parseFloat(loanTermInput);
 
   return true;
 }
 
-// set inputs to local storage
+// Set inputs to local storage
 function submitInputs() {
   let vehiclePrice = document.getElementById("vehicle-price").value;
   localStorage.setItem("vehicle-price", vehiclePrice);
@@ -107,14 +67,40 @@ function submitInputs() {
   localStorage.setItem("loan-term", loanTerm);
 }
 
-// get inputs from local storage
-let savedVehiclePrice = this.localStorage.getItem("vehicle-price");
-let savedDownPayment = this.localStorage.getItem("down-payment");
-let savedLoanTerm = this.localStorage.getItem("loan-term");
-let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
+// Update and display the monthly payment
+function updateMonthlyPayment() {
+  let savedVehiclePrice = parseFloat(localStorage.getItem("vehicle-price"));
+  let savedDownPayment = parseFloat(localStorage.getItem("down-payment"));
+  let savedLoanTerm = parseFloat(localStorage.getItem("loan-term"));
 
-// display the figures in the form boxes
+  let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
+  let displayPayment = document.getElementById("monthly-payment-display");
+  displayPayment.innerHTML = `<strong>Monthly Payment:</strong><br><br> $${monthlyPayment.toFixed(
+    2
+  )}<br><br> at 0% interest.`;
+
+  // Update the difference display
+  let quote = 800;
+  let displayDifference = document.getElementById("monthly-difference-display");
+  let difference = quote - monthlyPayment;
+  displayDifference.innerHTML = `You could be overpaying by as much as:<br><br><strong>$${difference.toFixed(
+    2
+  )} p/m.</strong>`;
+}
+
+function showMonthlyPaymentContainer() {
+  const monthlyPaymentElement = document.getElementById(
+    "monthly-payment-container"
+  );
+  monthlyPaymentElement.classList.remove("monthly-payment-toggle");
+}
+
+// Initial load: get inputs from local storage and update displays
 window.addEventListener("load", function () {
+  let savedVehiclePrice = localStorage.getItem("vehicle-price");
+  let savedDownPayment = localStorage.getItem("down-payment");
+  let savedLoanTerm = localStorage.getItem("loan-term");
+
   if (savedVehiclePrice) {
     document.getElementById("vehicle-price").value = savedVehiclePrice;
   }
@@ -126,48 +112,20 @@ window.addEventListener("load", function () {
   if (savedLoanTerm) {
     document.getElementById("loan-term").value = savedLoanTerm;
   }
-});
 
-// Calculate and display monthly payment
-window.addEventListener("load", function () {
-  if (monthlyPayment) {
-    let displayPayment = document.getElementById("monthly-payment-display");
-    displayPayment.innerHTML = `<strong>Monthly Payment:</strong><br><br> $${monthlyPayment.toFixed(
-      2
-    )}<br><br> at 0% interest.`;
-  }
-});
-
-// calculate and display difference between monthly payment and quote
-// note: "quote" variable to accept to modal input(s)
-window.addEventListener("load", function () {
-  let quote = 800;
-  if (monthlyPayment) {
-    let displayDifference = document.getElementById(
-      "monthly-difference-display"
-    );
-    let savedPaymentValue = parseFloat(monthlyPayment);
-    let difference = quote - savedPaymentValue;
-    displayDifference.innerHTML = `You could be overpaying by as much as:<br><br><strong>$${difference.toFixed(
-      2
-    )} p/m.</bold>`;
-  }
+  updateMonthlyPayment();
 });
 
 // create button to show suggestions with tooltip
 window.addEventListener("load", function () {
-  if (monthlyPayment) {
-    let tipButtonContainer = document.getElementById(
-      "tooltip-button-container"
-    );
-    let tipButton = this.document.createElement("button");
-    tipButton.setAttribute("id", "tips-button");
-    tipButton.setAttribute("class", "btn btn-background btn-text-color");
-    tipButton.textContent = `Tips`;
-    tipButtonContainer.appendChild(tipButton);
+  let tipButtonContainer = document.getElementById("tooltip-button-container");
+  let tipButton = document.createElement("button");
+  tipButton.setAttribute("id", "tips-button");
+  tipButton.setAttribute("class", "btn btn-background btn-text-color");
+  tipButton.textContent = `Tips`;
+  tipButtonContainer.appendChild(tipButton);
 
-    tipButton.addEventListener("click", showTips);
-  }
+  tipButton.addEventListener("click", showTips);
 });
 
 function showTips() {
