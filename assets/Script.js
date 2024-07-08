@@ -21,7 +21,9 @@ function validateForm(event) {
   }
 
   if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
-    alert("Please enter a positive number for the Vehicle Price or MSRP");
+    alert(
+      "Please enter a positive number without symbols for the Vehicle Price or MSRP"
+    );
     return false;
   }
 
@@ -34,7 +36,9 @@ function validateForm(event) {
   }
 
   if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
-    alert("Please enter a positive number for the Down Payment");
+    alert(
+      "Please enter a positive number without symbols for the Down Payment"
+    );
     return false;
   }
 
