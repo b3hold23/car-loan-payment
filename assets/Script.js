@@ -139,7 +139,7 @@ window.addEventListener("load", function () {
 });
 
 // calculate and display difference between monthly payment and quote
-// note: "quote" variale to accept to modal input(s)
+// note: "quote" variable to accept to modal input(s)
 window.addEventListener("load", function () {
   let quote = 800;
   if (monthlyPayment) {
