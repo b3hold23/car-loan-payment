@@ -27,6 +27,7 @@ h2,
 h3 {
   text-align: center;
 }
+
 header h1 {
   font-size: 2.5rem !important;
   color: var(--ghost-white);
@@ -41,12 +42,19 @@ header h3 {
   font-size: 1.2rem;
   color: var(--pumpkin);
 }
+
 svg {
-  width: 100%;
   color: var(--skobeloff);
 }
 
-/* consider making track for car */
+.left-car-icon {
+  margin-right: 8px;
+}
+
+.right-car-icon {
+  margin-left: 8px;
+}
+
 header {
   border-bottom: 5px solid black;
   padding: 20px;
