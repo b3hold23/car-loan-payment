@@ -87,7 +87,7 @@ function updateMonthlyPayment() {
   let quote = 800;
   let displayDifference = document.getElementById("monthly-difference-display");
   let difference = quote - monthlyPayment;
-  displayDifference.innerHTML = `You could be overpaying by as much as:<br><br><strong>$${difference.toFixed(
+  displayDifference.innerHTML = `You could save up to:<br><br><strong>$${difference.toFixed(
     2
   )} p/m.</strong>`;
 }
@@ -142,6 +142,6 @@ function showTips() {
 
   let showTips = document.createElement("p");
   showTips.setAttribute("id", "show-tips");
-  showTips.textContent = `Check the market adjustment, loan charges, add-ons, service charges, and sales tax.`;
+  showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
   showTipsContainer.appendChild(showTips);
 }

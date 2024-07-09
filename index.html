@@ -10,6 +10,12 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Car Loan Payment Calculator</title>
   </head>
   <body>
@@ -46,7 +52,7 @@
           </svg>
         </span>
       </h2>
-      <h3>Discover your baseline payment and identify additional costs</h3>
+      <h3>Discover your base payment and identify ways to save</h3>
     </header>
     <main>
       <form class="px-4 py-3" id="form">
@@ -84,8 +90,15 @@
         >
           Submit
         </button>
+        <p>
+          <br />
+          <strong>Note:</strong> This tool is for car loans and is not intended
+          for lease options.
+        </p>
       </form>
       <aside>
+        <div class="road-line-left"></div>
+        <div class="road-line-right"></div>
         <div class="monthly-payment-toggle" id="monthly-payment-container">
           <p id="monthly-payment-display"></p>
           <div class="card" style="width: 18rem">
