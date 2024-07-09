@@ -71,11 +71,15 @@
         <div class="mb-3">
           <label for="loan-term">Loan Term (months):</label>
           <input
-            type="text"
+            type="range"
             class="loan-term center-form-input"
             id="loan-term"
-            placeholder="72"
+            min="24"
+            max="84"
+            step="12"
+            value="72"
           />
+          <span id="loan-term-value">72</span>
         </div>
         <button
           type="submit"
