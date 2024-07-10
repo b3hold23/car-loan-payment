@@ -10,8 +10,12 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="./assets/style.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
     <title>Car Loan Payment Calculator</title>
   </head>
   <body>
@@ -48,7 +52,7 @@
           </svg>
         </span>
       </h2>
-      <h3>Discover your baseline payment and identify additional costs</h3>
+      <h3>Discover your base payment and identify ways to save</h3>
     </header>
     <main>
       <form class="px-4 py-3" id="form">
@@ -73,11 +77,15 @@
         <div class="mb-3">
           <label for="loan-term">Loan Term (months):</label>
           <input
-            type="text"
-            class="loan-term center-form-input"
+            type="range"
+            class="loan-term"
             id="loan-term"
-            placeholder="72"
+            min="24"
+            max="84"
+            step="12"
+            value="48"
           />
+          <span id="loan-term-value">48</span>
         </div>
         <button
           type="submit button"
@@ -85,33 +93,15 @@
           id="submit-button" data-bs-toggle="modal" data-bs-target="#exampleModal" >
           Submit
         </button>
-      </div>
-
-
-
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">Would you like to enter a third-party quote?</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis eius modi odit consequatur iure doloribus hic perspiciatis! Molestiae magnam ab, laudantium nihil sit quibusdam exercitationem quisquam ipsa nesciunt provident rem!
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-        
-
-
-
+        <p>
+          <br />
+          <strong>Note:</strong> This tool is for car loans and is not intended
+          for lease options.
+        </p>
       </form>
       <aside>
+        <div class="road-line-left"></div>
+        <div class="road-line-right"></div>
         <div class="monthly-payment-toggle" id="monthly-payment-container">
           <p id="monthly-payment-display"></p>
           <div class="card" style="width: 18rem">

@@ -2,7 +2,6 @@
   --gunmetal: #2d3142;
   --ghost-white: #f7f7ff;
   --skobeloff: #007474;
-  --white: #ffffff;
   --pumpkin: #f96900;
 }
 
@@ -34,6 +33,7 @@ html {
 h1,
 h2,
 h3 {
+  font-family: "Red Hat Display", sans-serif;
   text-align: center;
 }
 
@@ -64,8 +64,20 @@ svg {
   margin-left: 8px;
 }
 
+@keyframes right-lane-car {
+  0% {
+    opacity: 1;
+    transform: translateY(250px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 header {
-  border-bottom: 5px solid black;
+  border-bottom: 5px solid Gainsboro;
   padding: 20px;
   text-align: center;
   background-color: var(--gunmetal);
@@ -99,7 +111,7 @@ form input {
 }
 
 aside {
-  border-left: 5px solid black;
+  border-left: 5px dashed white;
   display: flex;
   justify-content: center;
 }
@@ -148,6 +160,7 @@ aside {
 
   form,
   aside {
+    font-family: "Red Hat Display", sans-serif;
     flex: none;
     width: 100%;
     margin-bottom: 20px;
@@ -165,4 +178,29 @@ aside {
   aside {
     border-left: none;
   }
+}
+input[type="range"] {
+  width: 100%;
+  height: 2px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #ccc;
+  outline: none;
+  border-radius: 50px;
+  opacity: 0.7;
+  transition: opacity 0.15s ease-in-out;
+}
+
+input[type="range"]:hover {
+  opacity: 5;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #f96900; 
+  cursor: pointer;
 }
