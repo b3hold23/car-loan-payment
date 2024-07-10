@@ -80,21 +80,35 @@
           />
         </div>
         <button
-          type="submit"
-          class="btn btn-background btn-text-color"
-          id="submit-button open">
+          type="submit button"
+          class="btn btn-background btn-text-color btn btn-primary"
+          id="submit-button" data-bs-toggle="modal" data-bs-target="#exampleModal" >
           Submit
         </button>
       </div>
 
-        <div class="modal-container" id="modal_container">
-          <div class="modal">
-            <span class="close" id="modal_close">&times;</span>
-            <h1>Modals are cool</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates, aut minus? Incidunt aliquam magni dignissimos obcaecati, ipsam esse omnis, est ad exercitationem necessitatibus porro delectus, possimus harum explicabo animi. Beatae.</p>
-            <button id="modal_button">Calculate</button>
-          </div>
-        </div>
+         <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Would you like to enter a third-party quote?</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veritatis eius modi odit consequatur iure doloribus hic perspiciatis! Molestiae magnam ab, laudantium nihil sit quibusdam exercitationem quisquam ipsa nesciunt provident rem!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
 
 
 
