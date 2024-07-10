@@ -9,6 +9,16 @@ document
     }
   });
 
+//This is the modal
+document.getElementById("add-quote").addEventListener("click", function (event) {
+  event.preventDefault();
+  if (validateForm(event)) {
+    submitInputs();
+    updateMonthlyPayment();
+    showMonthlyPaymentContainer();
+  }
+});
+
 // Validate the form
 function validateForm(event) {
   let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
@@ -72,6 +82,7 @@ function submitInputs() {
 
   let loanTerm = document.getElementById("loan-term").value;
   localStorage.setItem("loan-term", loanTerm);
+
 }
 
 // Update and display the monthly payment
