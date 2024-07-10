@@ -59,14 +59,7 @@ function validateForm(event) {
   return true;
 }
 
-// modal for price comparison
-const open = document.getElementById('submit-button');
-const modal_container = document.getElementById('modal_container');
-const close =  document.getElementById('modal_close');
 
-modal_close.addEventListener('click', () => {
-    modal_container.classList.remove('show');
-});
 
 
 // Set inputs to local storage
