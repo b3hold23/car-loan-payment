@@ -145,3 +145,13 @@ function showTips() {
   showTips.textContent = `Check the market adjustment, loan charges, add-ons, service charges, and sales tax.`;
   showTipsContainer.appendChild(showTips);
 }
+document.addEventListener("DOMContentLoaded", function() {
+  const loanTermSlider = document.getElementById('loan-term');
+  const loanTermValue = document.getElementById('loan-term-value');
+
+  loanTermValue.textContent = loanTermSlider.value; // Initial value display
+
+  loanTermSlider.addEventListener('input', function() {
+    loanTermValue.textContent = loanTermSlider.value;
+  });
+});
