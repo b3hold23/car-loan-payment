@@ -79,7 +79,7 @@ function updateMonthlyPayment() {
 
   let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
   let displayPayment = document.getElementById("monthly-payment-display");
-  displayPayment.innerHTML = `<strong>Monthly Payment:</strong><br><br> $${monthlyPayment.toFixed(
+  displayPayment.innerHTML = `<strong>Monthly Base Payment:</strong><br><br> $${monthlyPayment.toFixed(
     2
   )}<br><br> at 0% interest.`;
 
