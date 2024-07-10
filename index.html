@@ -90,7 +90,7 @@
         <button
           type="submit button"
           class="btn btn-background btn-text-color btn btn-primary"
-          id="submit-button" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+          id="submit-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >
           Submit
         </button>
         <p>
@@ -113,6 +113,25 @@
           </div>
         </div>
       </aside>
+
+        <!-- This is the modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Would you like to add a third-party quote?</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                Modal body text goes here.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No Thanks</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
     </main>
     <script src="./assets/Script.js"></script>
     <script
