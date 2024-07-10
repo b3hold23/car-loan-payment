@@ -2,31 +2,32 @@
 
 ## Description
 
-This project helps users determine their monthly car loan payments at 0% interest, providing an objective starting point to compare against third-party quotes. By understanding the baseline payment, users can make informed purchase decisions, and identify any additional costs like market-adjusted MSRP, loan fees, add-ons, service charges, and sales tax. This clarity helps users see the true cost of taking out a loan for a vehicle.
+This project helps potential car buyers determine their monthly car loan payments at 0% interest, providing an objective starting point to compare with a third-party quote. By understanding the base payment, users can identify additional costs (i.e. market-adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax) in order to understand the true cost of purchasing a vehicle, and increasing the liklihood that the user will make an informed purchase decision.
 
 ## Features
 
 - Calculate monthly car loan payments at 0% interest.
-- Compare the calculated payment against up to three third-party quotes.
-- Highlight potential overpayments or underpayments over the duration of the loan.
-- Tooltip with suggestions for understanding additional costs.
+- Compare the calculated payment to a third-party quote.
+- Discover potential monthly savings.
+- Find suggestions for understanding additional costs.
 
 ## Usage
 
 1. Load the webpage.
 2. Enter the following details:
 
-- Optional: up to three monthly-payment quotes from third-parties.
-- Vehicle price (MSRP)
-- Down payment
-- Loan term (in months)
+- Vehicle Price or MSRP ($)
+- Down Payment ($)
+- Loan Term (months)
 
-3. Click the "Go!" button.
-4. View the 0% interest quote and the comparison result.
+3. Click the "Submit" button.
+4. Enter a monthly-payment quote from a third-party (optional).
+5. View the base calculation at 0% and the difference from the quote.
+6. Click "Tips" button for suggestions to better understand potential charges.
 
 ### Example
 
-If the user enters a vehicle price of $30,000, a down payment of $5,000, and a loan term of 60 months, the 0% interest monthly payment will be displayed. If third-party quotes are entered, the difference between the highest quote and the 0% interest quote will be shown, indicating potential overpayment or underpayment.
+If the user enters a vehicle price of $48,000, a down payment of $9,600, and a loan term of 72 months, a monthly base payment of $533.33 at 0% interest will be displayed. If a third-party quote was entered, the difference between the third party quote and the base monthly payment will be shown, indicating potential savings. Suggestions for additional costs are indicated.
 
 ## Credits
 

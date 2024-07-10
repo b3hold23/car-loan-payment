@@ -79,7 +79,7 @@ function updateMonthlyPayment() {
 
   let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
   let displayPayment = document.getElementById("monthly-payment-display");
-  displayPayment.innerHTML = `<strong>Monthly Payment:</strong><br><br> $${monthlyPayment.toFixed(
+  displayPayment.innerHTML = `<strong>Monthly Base Payment:</strong><br><br> $${monthlyPayment.toFixed(
     2
   )}<br><br> at 0% interest.`;
 
@@ -87,7 +87,7 @@ function updateMonthlyPayment() {
   let quote = 800;
   let displayDifference = document.getElementById("monthly-difference-display");
   let difference = quote - monthlyPayment;
-  displayDifference.innerHTML = `You could be overpaying by as much as:<br><br><strong>$${difference.toFixed(
+  displayDifference.innerHTML = `You could save up to:<br><br><strong>$${difference.toFixed(
     2
   )} p/m.</strong>`;
 }
@@ -142,7 +142,7 @@ function showTips() {
 
   let showTips = document.createElement("p");
   showTips.setAttribute("id", "show-tips");
-  showTips.textContent = `Check the market adjustment, loan charges, add-ons, service charges, and sales tax.`;
+  showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
   showTipsContainer.appendChild(showTips);
 }
 document.addEventListener("DOMContentLoaded", function() {
