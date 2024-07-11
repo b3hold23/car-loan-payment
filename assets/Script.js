@@ -129,22 +129,26 @@ window.addEventListener("load", function () {
   tipButton.textContent = `Tips`;
   tipButtonContainer.appendChild(tipButton);
 
-  tipButton.addEventListener("click", showTips);
+  tipButton.addEventListener("click", toggleTips);
 });
 
-function showTips() {
+function toggleTips() {
   let showTipsContainer = document.getElementById("show-tips-container");
 
   let existingTips = document.getElementById("show-tips");
   if (existingTips) {
-    return;
+  
+    showTipsContainer.removeChild(existingTips);
+  } else {
+    
+    let showTips = document.createElement("p");
+    showTips.setAttribute("id", "show-tips");
+    showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
+    showTipsContainer.appendChild(showTips);
   }
-
-  let showTips = document.createElement("p");
-  showTips.setAttribute("id", "show-tips");
-  showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
-  showTipsContainer.appendChild(showTips);
 }
+
+
 document.addEventListener("DOMContentLoaded", function() {
   const loanTermSlider = document.getElementById('loan-term');
   const loanTermValue = document.getElementById('loan-term-value');
