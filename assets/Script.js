@@ -117,6 +117,7 @@ function showTips() {
   tipsContainer.appendChild(tipsElement);
 }
 
+// Integrate slider with local storage.
 document.addEventListener("DOMContentLoaded", function () {
   const loanTermSlider = document.getElementById("loan-term");
   const loanTermValueSpan = document.getElementById("loan-term-value");
