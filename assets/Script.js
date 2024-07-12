@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  // Validate the inputs with modals.
+  // Validate the inputs with validation modal.
   function validateForm(event) {
     let vehiclePriceInput = document
       .getElementById("vehicle-price")
@@ -20,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
     let loanTermInput = document.getElementById("loan-term").value.trim();
 
     if (vehiclePriceInput === "") {
-      displayModal("Please enter the Vehicle Price or MSRP");
+      displayValidationModal("Please enter the Vehicle Price or MSRP");
       return false;
     }
 
     if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
-      displayModal(
+      displayValidationModal(
         "Please enter a positive number without symbols for the Vehicle Price or MSRP"
       );
       return false;
@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
     if (downPaymentInput === "") {
-      displayModal("Please enter the Down Payment or enter 0");
+      displayValidationModal("Please enter the Down Payment or enter 0");
       return false;
     }
 
     if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
-      displayModal(
+      displayValidationModal(
         "Please enter a positive number without symbols for the Down Payment"
       );
       return false;
@@ -54,7 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
       isNaN(loanTermInput) ||
       parseFloat(loanTermInput) <= 0
     ) {
-      displayModal("Please enter a positive number for the Loan Term");
+      displayValidationModal(
+        "Please enter a positive number for the Loan Term"
+      );
       return false;
     }
 
@@ -63,12 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return true;
   }
 
-  // Run the modals based on data validation.
-  function displayModal(message) {
-    // Set the modal message using jQuery.
+  // Run the validation modal based on data validation.
+  function displayValidationModal(message) {
+    // Set the validation modal message using jQuery.
     $("#validationMessage").text(message);
 
-    // Show the modal using Bootstrap 5.
+    // Show the validation modal using Bootstrap 5.
     $("#validationModal").modal("show");
   }
 
@@ -158,10 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
     container.style.display = "block";
   }
 
-  // Function to show Bootstrap Modal
-  function showModal() {
-    const myModal = new bootstrap.Modal(document.getElementById("quoteModal"));
-    myModal.show();
+  // Function to show quote modal
+  function showQuoteModal() {
+    const quoteModal = new bootstrap.Modal(
+      document.getElementById("quoteModal")
+    );
+    quoteModal.show();
 
     document
       .getElementById("submit-quote")
@@ -178,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("down-payment", downPayment);
     localStorage.setItem("loan-term", loanTerm);
 
-    showModal();
+    showQuoteModal();
   }
 
   function submitQuote() {
