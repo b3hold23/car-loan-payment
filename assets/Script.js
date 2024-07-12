@@ -92,7 +92,7 @@ window.addEventListener("load", function () {
 
 // Create button for displaying saving tips.
 window.addEventListener("load", function () {
-  let tipButtonContainer = document.getElementById("tooltip-button-container");
+  let tipButtonContainer = document.getElementById("tips-button-container");
   let tipButton = document.createElement("button");
   tipButton.setAttribute("id", "tips-button");
   tipButton.setAttribute("class", "btn btn-background btn-text-color");
@@ -131,6 +131,7 @@ document.getElementById("loan-term").addEventListener("input", function () {
   document.getElementById("loan-term-value").textContent = this.value;
 });
 
+// Show the payment container on submit.
 function showMonthlyPaymentContainer() {
   let container = document.getElementById("monthly-payment-container");
   container.style.display = "block";
