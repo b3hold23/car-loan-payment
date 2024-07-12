@@ -1,5 +1,4 @@
-document
-  .getElementById("submit-button")
+document.getElementById("submit-button")
   .addEventListener("click", function (event) {
     event.preventDefault(); // Prevent the form from submitting the traditional way
     if (validateForm(event)) {
@@ -10,30 +9,24 @@ document
   });
 
 //This is the modal
-document.getElementById("add-quote").addEventListener("click", function (event) {
-  event.preventDefault();
-  if (validateForm(event)) {
-    submitInputs();
-    updateMonthlyPayment();
-    showMonthlyPaymentContainer();
-  }
-});
+
+
 
 // Validate the form
+let 
+
 function validateForm(event) {
   let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
   let downPaymentInput = document.getElementById("down-payment").value.trim();
   let loanTermInput = document.getElementById("loan-term").value.trim();
 
   if (vehiclePriceInput === "") {
-    alert("Please enter the Vehicle Price or MSRP");
-    return false;
+    displayModal("Please enter the Vehicle Price or MSRP");
+    return true;
   }
 
   if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
-    alert(
-      "Please enter a positive number without symbols for the Vehicle Price or MSRP"
-    );
+    displayModal("Please enter a positive number without symbols for the Vehicle Price or MSRP");
     return false;
   }
 
@@ -41,26 +34,20 @@ function validateForm(event) {
   document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
   if (downPaymentInput === "") {
-    alert("Please enter the Down Payment or enter 0");
+    displayModal("Please enter the Down Payment or enter 0");
     return false;
   }
 
   if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
-    alert(
-      "Please enter a positive number without symbols for the Down Payment"
-    );
+    displayModal("Please enter a positive number without symbols for the Down Payment");
     return false;
   }
 
   let formattedDownPayment = parseFloat(downPaymentInput).toFixed(2);
   document.getElementById("down-payment").value = formattedDownPayment;
 
-  if (
-    loanTermInput === "" ||
-    isNaN(loanTermInput) ||
-    parseFloat(loanTermInput) <= 0
-  ) {
-    alert("Please enter a positive number for the Loan Term");
+  if (loanTermInput === "" || isNaN(loanTermInput) || parseFloat(loanTermInput) <= 0) {
+    displayModal("Please enter a positive number for the Loan Term");
     return false;
   }
 
