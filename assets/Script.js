@@ -123,106 +123,95 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Integrate slider with local storage.
-  document.addEventListener("DOMContentLoaded", function () {
-    const loanTermSlider = document.getElementById("loan-term");
-    const loanTermValueSpan = document.getElementById("loan-term-value");
+  const loanTermSlider = document.getElementById("loan-term");
+  const loanTermValueSpan = document.getElementById("loan-term-value");
 
-    // Update loan term value span on input change
-    function updateLoanTermValue() {
-      loanTermValueSpan.textContent = loanTermSlider.value;
-    }
+  // Update loan term value span on input change
+  function updateLoanTermValue() {
+    loanTermValueSpan.textContent = loanTermSlider.value;
+  }
 
-    // Initial update from local storage
-    let savedLoanTerm = localStorage.getItem("loan-term");
-    if (savedLoanTerm) {
-      loanTermSlider.value = savedLoanTerm;
-      updateLoanTermValue(); // Update the displayed value initially
-    }
+  // Initial update from local storage
+  let savedLoanTerm = localStorage.getItem("loan-term");
+  if (savedLoanTerm) {
+    loanTermSlider.value = savedLoanTerm;
+    updateLoanTermValue(); // Update the displayed value initially
+  }
 
-    // Listen for input changes on loan term slider
-    loanTermSlider.addEventListener("input", function () {
-      updateLoanTermValue();
-      // Update local storage with the current slider value
-      localStorage.setItem("loan-term", loanTermSlider.value);
-    });
-
-    // Update loan term value when the input field changes
-    document.getElementById("loan-term").addEventListener("input", function () {
-      loanTermValueSpan.textContent = this.value;
-      // Update local storage with the current input field value
-      localStorage.setItem("loan-term", this.value);
-    });
+  // Listen for input changes on loan term slider
+  loanTermSlider.addEventListener("input", function () {
+    updateLoanTermValue();
+    // Update local storage with the current slider value
+    localStorage.setItem("loan-term", loanTermSlider.value);
   });
 
-  // Show the payment container on submit.
-  function showMonthlyPaymentContainer() {
-    let container = document.getElementById("monthly-payment-container");
-    container.style.display = "block";
-  }
-
-  // Function to show quote modal
-  function showQuoteModal() {
-    const quoteModal = new bootstrap.Modal(
-      document.getElementById("quoteModal")
-    );
-    quoteModal.show();
-
-    document
-      .getElementById("submit-quote")
-      .addEventListener("click", submitQuote);
-  }
-
-  // Save inputs to local storage.
-  function submitInputs() {
-    let vehiclePrice = document.getElementById("vehicle-price").value;
-    let downPayment = document.getElementById("down-payment").value;
-    let loanTerm = document.getElementById("loan-term").value;
-
-    localStorage.setItem("vehicle-price", vehiclePrice);
-    localStorage.setItem("down-payment", downPayment);
-    localStorage.setItem("loan-term", loanTerm);
-
-    showQuoteModal();
-  }
-
-  function submitQuote() {
-    let quoteInput = document.getElementById("quote-input").value;
-    localStorage.setItem("quote-input", quoteInput);
-    updateMonthlyPayment();
-  }
-
-  // Get data from local storage.
-  function updateMonthlyPayment(quoteInput) {
-    let vehiclePrice = parseFloat(localStorage.getItem("vehicle-price")) || 0;
-    let downPayment = parseFloat(localStorage.getItem("down-payment")) || 0;
-    let loanTerm = parseFloat(localStorage.getItem("loan-term")) || 0;
-
-    if (vehiclePrice === 0 || loanTerm === 0) {
-      return;
-    }
-
-    // Calculate monthly base payment.
-    let monthlyPayment = (vehiclePrice - downPayment) / loanTerm;
-    document.getElementById(
-      "monthly-payment-display"
-    ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>$${monthlyPayment.toFixed(
-      2
-    )} <br><br> at 0% p/m`;
-
-    // Calculate potential savings.
-    let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
-    let priceDifference = quote - monthlyPayment;
-    document.getElementById(
-      "monthly-difference-display"
-    ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
-      2
-    )} p/m </b>`;
-  }
-
-  // Listen for changes on the quote input field
-  document.getElementById("quote-input").addEventListener("input", function () {
-    let quoteInput = this.value;
-    localStorage.setItem("quote-input", quoteInput);
-    updateMonthlyPayment();
+  // Update loan term value when the input field changes
+  document.getElementById("loan-term").addEventListener("input", function () {
+    loanTermValueSpan.textContent = this.value;
+    // Update local storage with the current input field value
+    localStorage.setItem("loan-term", this.value);
   });
 });
+
+// Show the payment container on submit.
+function showMonthlyPaymentContainer() {
+  let container = document.getElementById("monthly-payment-container");
+  container.style.display = "block";
+}
+
+// Function to show quote modal
+function showQuoteModal() {
+  const quoteModal = new bootstrap.Modal(document.getElementById("quoteModal"));
+  quoteModal.show();
+
+  document
+    .getElementById("submit-quote")
+    .addEventListener("click", submitQuote);
+}
+
+// Save inputs to local storage.
+function submitInputs() {
+  let vehiclePrice = document.getElementById("vehicle-price").value;
+  let downPayment = document.getElementById("down-payment").value;
+  let loanTerm = document.getElementById("loan-term").value;
+
+  localStorage.setItem("vehicle-price", vehiclePrice);
+  localStorage.setItem("down-payment", downPayment);
+  localStorage.setItem("loan-term", loanTerm);
+
+  showQuoteModal();
+}
+
+function submitQuote() {
+  let quoteInput = document.getElementById("quote-input").value;
+  localStorage.setItem("quote-input", quoteInput);
+  updateMonthlyPayment();
+}
+
+// Get data from local storage.
+function updateMonthlyPayment(quoteInput) {
+  let vehiclePrice = parseFloat(localStorage.getItem("vehicle-price")) || 0;
+  let downPayment = parseFloat(localStorage.getItem("down-payment")) || 0;
+  let loanTerm = parseFloat(localStorage.getItem("loan-term")) || 0;
+
+  if (vehiclePrice === 0 || loanTerm === 0) {
+    return;
+  }
+
+  // Calculate monthly base payment.
+  let monthlyPayment = (vehiclePrice - downPayment) / loanTerm;
+  document.getElementById(
+    "monthly-payment-display"
+  ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>$${monthlyPayment.toFixed(
+    2
+  )} <br><br> at 0% p/m`;
+
+  // Calculate potential savings.
+  let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
+  let priceDifference = quote - monthlyPayment;
+  document.getElementById(
+    "monthly-difference-display"
+  ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
+    2
+  )} p/m </b>`;
+}
