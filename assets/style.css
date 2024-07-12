@@ -1,3 +1,4 @@
+/* store muted colors for finance application */
 :root {
   --gunmetal: #2d3142;
   --ghost-white: #f7f7ff;
@@ -28,22 +29,22 @@ h3 {
   text-align: center;
 }
 
-header h1 {
+.title-1 {
   font-size: 2.5rem !important;
   color: var(--ghost-white);
 }
 
-header h2 {
+.title-2 {
   font-size: 1rem;
   color: var(--pumpkin);
 }
 
-header h3 {
+.title-3 {
   font-size: 1.2rem;
   color: var(--pumpkin);
 }
 
-svg {
+.car-icon {
   color: var(--skobeloff);
 }
 
@@ -55,6 +56,7 @@ svg {
   margin-left: 8px;
 }
 
+/* position car icons */
 @keyframes right-lane-car {
   0% {
     opacity: 1;
@@ -67,18 +69,19 @@ svg {
   }
 }
 
-header {
+.header {
   border-bottom: 5px solid Gainsboro;
   padding: 20px;
   text-align: center;
   background-color: var(--gunmetal);
 }
 
-main {
+.main {
   display: flex;
   min-height: calc(100vh - 185px);
 }
 
+/* Give form and aside even distribution */
 form,
 aside {
   flex: 1 1 50%;
@@ -101,6 +104,7 @@ form input {
   box-sizing: border-box;
 }
 
+/* style the loan term slider */
 input[type="range"] {
   width: 100%;
   height: 2px;
@@ -170,8 +174,9 @@ aside {
   align-items: center;
 }
 
+/* style for mobile */
 @media (max-width: 480px) {
-  main {
+  .main {
     display: block;
   }
 
@@ -183,7 +188,7 @@ aside {
     margin-bottom: 20px;
     text-align: center;
   }
-
+  /* center form items */
   form :placeholder-shown {
     text-align: center;
   }
