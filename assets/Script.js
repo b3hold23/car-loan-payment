@@ -1,7 +1,8 @@
+// Run validation, inputs, and monthly payment on form submit.
 document
   .getElementById("submit-button")
   .addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent the form from submitting the traditional way
+    event.preventDefault();
     if (validateForm(event)) {
       submitInputs();
       updateMonthlyPayment();
@@ -9,6 +10,7 @@ document
     }
   });
 
+// Validate the inputs with modals.
 function validateForm(event) {
   let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
   let downPaymentInput = document.getElementById("down-payment").value.trim();
@@ -58,15 +60,16 @@ function validateForm(event) {
   return true;
 }
 
+// Run the modals based on data validation.
 function displayModal(message) {
-  // Set the modal message using jQuery
+  // Set the modal message using jQuery.
   $("#validationMessage").text(message);
 
-  // Show the modal using Bootstrap 5
+  // Show the modal using Bootstrap 5.
   $("#validationModal").modal("show");
 }
 
-// Initial load: get inputs from local storage and update displays
+// Initial load: get inputs from local storage and update displays.
 window.addEventListener("load", function () {
   let savedVehiclePrice = localStorage.getItem("vehicle-price");
   let savedDownPayment = localStorage.getItem("down-payment");
@@ -87,7 +90,7 @@ window.addEventListener("load", function () {
   updateMonthlyPayment();
 });
 
-// create button to show suggestions with tooltip
+// Create button for displaying saving tips.
 window.addEventListener("load", function () {
   let tipButtonContainer = document.getElementById("tooltip-button-container");
   let tipButton = document.createElement("button");
@@ -99,25 +102,25 @@ window.addEventListener("load", function () {
   tipButton.addEventListener("click", showTips);
 });
 
+// Display saving tips on button click.
 function showTips() {
-  let showTipsContainer = document.getElementById("show-tips-container");
+  let tipsContainer = document.getElementById("show-tips-container");
 
   let existingTips = document.getElementById("show-tips");
   if (existingTips) {
     return;
   }
 
-  let showTips = document.createElement("p");
-  showTips.setAttribute("id", "show-tips");
-  showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
-  showTipsContainer.appendChild(showTips);
+  let tipsElement = document.createElement("p");
+  tipsElement.setAttribute("id", "show-tips");
+  tipsElement.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
+  tipsContainer.appendChild(tipsElement);
 }
 
+// Pass the loan term value back into the from slider input.
 document.addEventListener("DOMContentLoaded", function () {
   const loanTermSlider = document.getElementById("loan-term");
   const loanTermValueSpan = document.getElementById("loan-term-value");
-
-  loanTermValueSpan.textContent = loanTermSlider.value;
 
   loanTermSlider.addEventListener("input", function () {
     loanTermValueSpan.textContent = loanTermSlider.value;
@@ -133,7 +136,7 @@ function showMonthlyPaymentContainer() {
   container.style.display = "block";
 }
 
-// save inputs to local storage and update displays
+// Save inputs to local storage.
 function submitInputs() {
   let vehiclePrice = document.getElementById("vehicle-price").value;
   let downPayment = document.getElementById("down-payment").value;
@@ -144,6 +147,7 @@ function submitInputs() {
   localStorage.setItem("loan-term", loanTerm);
 }
 
+// Get data from local storage.
 function updateMonthlyPayment() {
   let vehiclePrice = parseFloat(localStorage.getItem("vehicle-price")) || 0;
   let downPayment = parseFloat(localStorage.getItem("down-payment")) || 0;
@@ -153,6 +157,7 @@ function updateMonthlyPayment() {
     return;
   }
 
+  // Calculate monthly base payment.
   let monthlyPayment = (vehiclePrice - downPayment) / loanTerm;
   document.getElementById(
     "monthly-payment-display"
@@ -160,11 +165,12 @@ function updateMonthlyPayment() {
     2
   )} <br><br> at 0% p/m`;
 
-  let priceDifference = 48000 - vehiclePrice;
-  let differencePerMonth = priceDifference / loanTerm;
+  // Calculate potential savings.
+  let quote = 800;
+  let priceDifference = quote - monthlyPayment;
   document.getElementById(
     "monthly-difference-display"
-  ).innerHTML = `Potential savings: <br><br><b>$${differencePerMonth.toFixed(
+  ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
     2
   )} p/m </b>`;
 }
