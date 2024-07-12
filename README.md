@@ -31,14 +31,18 @@ If the user enters a vehicle price of $48,000, a down payment of $9,600, and a l
 
 ## Screenshot
 
-![Screenshot](./assets/images/screenshot)
+![Screenshot](./assets/images/screenshot.png)
+
+## Deploy Link
+
+https://b3hold23.github.io/car-loan-payment/
 
 ## Credits
 
 Collaborators:
 
-Jaron Anderton:
-Rory Dowse: [github.com/RoryDowse](https://github.com/RoryDowse)
+Jaron Anderton: <br>
+Rory Dowse: [github.com/RoryDowse](https://github.com/RoryDowse) <br>
 Angel Fernandez:
 
 ## License
