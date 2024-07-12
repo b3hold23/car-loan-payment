@@ -130,7 +130,7 @@
     ></script>
     <script src="./assets/Script.js"></script>
 
-    <!-- Modal -->
+    <!-- Validation Modal -->
     <div
       class="modal fade"
       id="validationModal"
@@ -166,5 +166,52 @@
         </div>
       </div>
     </div>
+
+        <!-- Quote Modal -->
+        <div
+        class="modal fade"
+        id="quoteModal"
+        tabindex="-1"
+        aria-labelledby="quoteModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Optional: Would you like to add a quote?
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Submitting a third-party quote will help you compare and save.
+              </p>
+              <p>
+                Please ensure the Vehicle Price, Down Payment, and Loan Term for the quote are
+                the same as the figures you just submitted.
+              </p>
+              <form id="quote-form">
+                <label for="quote-input">Quote ($):</label>
+                <input type="text" class="quote-input" id="quote-input" /> <br />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" class="btn btn-primary" id="submit-quote">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </body>
 </html>
