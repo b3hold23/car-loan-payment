@@ -29,6 +29,10 @@ This project helps potential car buyers determine their monthly car loan payment
 
 If the user enters a vehicle price of $48,000, a down payment of $9,600, and a loan term of 72 months, a monthly base payment of $533.33 at 0% interest will be displayed. If a third-party quote was entered, the difference between the third party quote and the base monthly payment will be shown, indicating potential savings. Suggestions for additional costs are indicated.
 
+## Screenshot
+
+![Screenshot](./assets/images/screenshot)
+
 ## Credits
 
 Collaborators:
