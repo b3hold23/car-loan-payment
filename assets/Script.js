@@ -209,9 +209,15 @@ function updateMonthlyPayment(quoteInput) {
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
   let priceDifference = quote - monthlyPayment;
-  document.getElementById(
-    "monthly-difference-display"
-  ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
+
+  let differenceDisplay = `Potential savings: <br><br><b>$${priceDifference.toFixed(
     2
   )} p/m </b>`;
+
+  if (quote === 0) {
+    differenceDisplay = `Potential savings:<br><br><b>$0 p/m.</b>`;
+  }
+
+  document.getElementById("monthly-difference-display").innerHTML =
+    differenceDisplay;
 }
