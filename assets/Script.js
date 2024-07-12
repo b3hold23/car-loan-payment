@@ -117,18 +117,35 @@ function showTips() {
   tipsContainer.appendChild(tipsElement);
 }
 
-// Pass the loan term value back into the from slider input.
 document.addEventListener("DOMContentLoaded", function () {
   const loanTermSlider = document.getElementById("loan-term");
   const loanTermValueSpan = document.getElementById("loan-term-value");
 
-  loanTermSlider.addEventListener("input", function () {
+  // Update loan term value span on input change
+  function updateLoanTermValue() {
     loanTermValueSpan.textContent = loanTermSlider.value;
-  });
-});
+  }
 
-document.getElementById("loan-term").addEventListener("input", function () {
-  document.getElementById("loan-term-value").textContent = this.value;
+  // Initial update from local storage
+  let savedLoanTerm = localStorage.getItem("loan-term");
+  if (savedLoanTerm) {
+    loanTermSlider.value = savedLoanTerm;
+    updateLoanTermValue(); // Update the displayed value initially
+  }
+
+  // Listen for input changes on loan term slider
+  loanTermSlider.addEventListener("input", function () {
+    updateLoanTermValue();
+    // Update local storage with the current slider value
+    localStorage.setItem("loan-term", loanTermSlider.value);
+  });
+
+  // Update loan term value when the input field changes
+  document.getElementById("loan-term").addEventListener("input", function () {
+    loanTermValueSpan.textContent = this.value;
+    // Update local storage with the current input field value
+    localStorage.setItem("loan-term", this.value);
+  });
 });
 
 // Show the payment container on submit.
