@@ -9,19 +9,18 @@ document
     }
   });
 
-// Validate the form
 function validateForm(event) {
   let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
   let downPaymentInput = document.getElementById("down-payment").value.trim();
   let loanTermInput = document.getElementById("loan-term").value.trim();
 
   if (vehiclePriceInput === "") {
-    alert("Please enter the Vehicle Price or MSRP");
+    displayModal("Please enter the Vehicle Price or MSRP");
     return false;
   }
 
   if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
-    alert(
+    displayModal(
       "Please enter a positive number without symbols for the Vehicle Price or MSRP"
     );
     return false;
@@ -31,12 +30,12 @@ function validateForm(event) {
   document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
   if (downPaymentInput === "") {
-    alert("Please enter the Down Payment or enter 0");
+    displayModal("Please enter the Down Payment or enter 0");
     return false;
   }
 
   if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
-    alert(
+    displayModal(
       "Please enter a positive number without symbols for the Down Payment"
     );
     return false;
@@ -50,7 +49,7 @@ function validateForm(event) {
     isNaN(loanTermInput) ||
     parseFloat(loanTermInput) <= 0
   ) {
-    alert("Please enter a positive number for the Loan Term");
+    displayModal("Please enter a positive number for the Loan Term");
     return false;
   }
 
@@ -59,44 +58,12 @@ function validateForm(event) {
   return true;
 }
 
-// Set inputs to local storage
-function submitInputs() {
-  let vehiclePrice = document.getElementById("vehicle-price").value;
-  localStorage.setItem("vehicle-price", vehiclePrice);
+function displayModal(message) {
+  // Set the modal message using jQuery
+  $("#validationMessage").text(message);
 
-  let downPayment = document.getElementById("down-payment").value;
-  localStorage.setItem("down-payment", downPayment);
-
-  let loanTerm = document.getElementById("loan-term").value;
-  localStorage.setItem("loan-term", loanTerm);
-}
-
-// Update and display the monthly payment
-function updateMonthlyPayment() {
-  let savedVehiclePrice = parseFloat(localStorage.getItem("vehicle-price"));
-  let savedDownPayment = parseFloat(localStorage.getItem("down-payment"));
-  let savedLoanTerm = parseFloat(localStorage.getItem("loan-term"));
-
-  let monthlyPayment = (savedVehiclePrice - savedDownPayment) / savedLoanTerm;
-  let displayPayment = document.getElementById("monthly-payment-display");
-  displayPayment.innerHTML = `<strong>Monthly Base Payment:</strong><br><br> $${monthlyPayment.toFixed(
-    2
-  )}<br><br> at 0% interest.`;
-
-  // Update the difference display
-  let quote = 800;
-  let displayDifference = document.getElementById("monthly-difference-display");
-  let difference = quote - monthlyPayment;
-  displayDifference.innerHTML = `You could save up to:<br><br><strong>$${difference.toFixed(
-    2
-  )} p/m.</strong>`;
-}
-
-function showMonthlyPaymentContainer() {
-  const monthlyPaymentElement = document.getElementById(
-    "monthly-payment-container"
-  );
-  monthlyPaymentElement.classList.remove("monthly-payment-toggle");
+  // Show the modal using Bootstrap 5
+  $("#validationModal").modal("show");
 }
 
 // Initial load: get inputs from local storage and update displays
@@ -145,13 +112,59 @@ function showTips() {
   showTips.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
   showTipsContainer.appendChild(showTips);
 }
-document.addEventListener("DOMContentLoaded", function() {
-  const loanTermSlider = document.getElementById('loan-term');
-  const loanTermValue = document.getElementById('loan-term-value');
 
-  loanTermValue.textContent = loanTermSlider.value; // Initial value display
+document.addEventListener("DOMContentLoaded", function () {
+  const loanTermSlider = document.getElementById("loan-term");
+  const loanTermValueSpan = document.getElementById("loan-term-value");
 
-  loanTermSlider.addEventListener('input', function() {
-    loanTermValue.textContent = loanTermSlider.value;
+  loanTermValueSpan.textContent = loanTermSlider.value;
+
+  loanTermSlider.addEventListener("input", function () {
+    loanTermValueSpan.textContent = loanTermSlider.value;
   });
 });
+
+document.getElementById("loan-term").addEventListener("input", function () {
+  document.getElementById("loan-term-value").textContent = this.value;
+});
+
+function showMonthlyPaymentContainer() {
+  let container = document.getElementById("monthly-payment-container");
+  container.style.display = "block";
+}
+
+// save inputs to local storage and update displays
+function submitInputs() {
+  let vehiclePrice = document.getElementById("vehicle-price").value;
+  let downPayment = document.getElementById("down-payment").value;
+  let loanTerm = document.getElementById("loan-term").value;
+
+  localStorage.setItem("vehicle-price", vehiclePrice);
+  localStorage.setItem("down-payment", downPayment);
+  localStorage.setItem("loan-term", loanTerm);
+}
+
+function updateMonthlyPayment() {
+  let vehiclePrice = parseFloat(localStorage.getItem("vehicle-price")) || 0;
+  let downPayment = parseFloat(localStorage.getItem("down-payment")) || 0;
+  let loanTerm = parseFloat(localStorage.getItem("loan-term")) || 0;
+
+  if (vehiclePrice === 0 || loanTerm === 0) {
+    return;
+  }
+
+  let monthlyPayment = (vehiclePrice - downPayment) / loanTerm;
+  document.getElementById(
+    "monthly-payment-display"
+  ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>$${monthlyPayment.toFixed(
+    2
+  )} <br><br> at 0% p/m`;
+
+  let priceDifference = 48000 - vehiclePrice;
+  let differencePerMonth = priceDifference / loanTerm;
+  document.getElementById(
+    "monthly-difference-display"
+  ).innerHTML = `Potential savings: <br><br><b>$${differencePerMonth.toFixed(
+    2
+  )} p/m </b>`;
+}
