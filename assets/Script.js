@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
     let loanTermInput = document.getElementById("loan-term").value.trim();
 
     if (vehiclePriceInput === "") {
-      displayValidationModal("Please enter the Vehicle Price or MSRP");
+      displayValidationModal("Please enter the Vehicle Price or MSRP.");
       return false;
     }
 
     if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
       displayValidationModal(
-        "Please enter a positive number without symbols for the Vehicle Price or MSRP"
+        "Please enter a positive number without symbols for the Vehicle Price or MSRP."
       );
       return false;
     }
@@ -35,13 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
     if (downPaymentInput === "") {
-      displayValidationModal("Please enter the Down Payment or enter 0");
+      displayValidationModal("Please enter the Down Payment or enter 0.");
       return false;
     }
 
     if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
       displayValidationModal(
-        "Please enter a positive number without symbols for the Down Payment"
+        "Please enter a positive number without symbols for the Down Payment."
       );
       return false;
     }
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
       parseFloat(loanTermInput) <= 0
     ) {
       displayValidationModal(
-        "Please enter a positive number for the Loan Term"
+        "Please enter a positive number for the Loan Term."
       );
       return false;
     }
@@ -204,7 +204,7 @@ function updateMonthlyPayment(quoteInput) {
     "monthly-payment-display"
   ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>$${monthlyPayment.toFixed(
     2
-  )} <br><br> at 0% p/m`;
+  )} <br><br> at 0% p/m.`;
 
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
@@ -212,7 +212,7 @@ function updateMonthlyPayment(quoteInput) {
 
   let differenceDisplay = `Potential savings: <br><br><b>$${priceDifference.toFixed(
     2
-  )} p/m </b>`;
+  )} p/m. </b>`;
 
   if (!isNaN(quote) && quote > 0) {
     priceDifference = quote - monthlyPayment;
@@ -222,5 +222,5 @@ function updateMonthlyPayment(quoteInput) {
     "monthly-difference-display"
   ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
     2
-  )} p/m </b>`;
+  )} p/m. </b>`;
 }
