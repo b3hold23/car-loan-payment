@@ -10,10 +10,21 @@ document.addEventListener("DOMContentLoaded", function () {
         showMonthlyPaymentContainer();
       }
     });
+
   // Submit quote on quote modal save
   document
     .getElementById("submit-quote")
     .addEventListener("click", submitQuote);
+
+  // Save quote on enter press
+  document
+    .getElementById("quote-input")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submitQuote();
+      }
+    });
 
   // Validate the inputs with validation modal.
   function validateForm(event) {
@@ -147,6 +158,8 @@ document.addEventListener("DOMContentLoaded", function () {
     updateLoanTermValue();
     // Update local storage with the current slider value
     localStorage.setItem("loan-term", loanTermSlider.value);
+    // Update monthly payment and potential savings
+    updateMonthlyPayment();
   });
 
   // Update loan term value when the input field changes
@@ -154,6 +167,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loanTermValueSpan.textContent = this.value;
     // Update local storage with the current input field value
     localStorage.setItem("loan-term", this.value);
+    // Update monthly payment and potential savings
+    updateMonthlyPayment();
   });
 });
 
