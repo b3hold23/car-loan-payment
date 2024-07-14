@@ -181,6 +181,10 @@ function showMonthlyPaymentContainer() {
 // Function to show quote modal
 function showQuoteModal() {
   const quoteModal = new bootstrap.Modal(document.getElementById("quoteModal"));
+  let storedQuoteInput = localStorage.getItem("quote-input");
+  if (storedQuoteInput) {
+    document.getElementById("quote-input").value = storedQuoteInput;
+  }
   quoteModal.show();
 
   document
