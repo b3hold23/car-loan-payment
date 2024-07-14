@@ -233,15 +233,7 @@ function showQuoteModal() {
     .addEventListener("click", function () {
       let quoteInput = document.getElementById("quote-input").value.trim();
 
-      // Check if the input is a valid integer
-      if (!isValidInteger(quoteInput)) {
-        displayValidationModal(
-          "Please enter a valid integer for the Quote amount."
-        );
-        return;
-      }
-
-      // Save valid quote input to local storage
+      // Save quote input to local storage
       localStorage.setItem("quote-input", quoteInput);
       updateMonthlyPayment();
       $("#quoteModal").modal("hide");
@@ -304,7 +296,7 @@ function updateMonthlyPayment(quoteInput) {
       style: "currency",
       currency: "USD",
     }
-  )} <br><br> at 0% p/m <br> (and no markup).`;
+  )} <br><br> at 0% p/m <br> with no additional markup.`;
 
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
@@ -322,5 +314,5 @@ function updateMonthlyPayment(quoteInput) {
       style: "currency",
       currency: "USD",
     }
-  )} p/m. </b>`;
+  )} p/m </b> <br><br>on your quote.`;
 }
