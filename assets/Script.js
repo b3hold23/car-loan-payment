@@ -10,6 +10,10 @@ document.addEventListener("DOMContentLoaded", function () {
         showMonthlyPaymentContainer();
       }
     });
+  // Submit quote on quote modal save
+  document
+    .getElementById("submit-quote")
+    .addEventListener("click", submitQuote);
 
   // Validate the inputs with validation modal.
   function validateForm(event) {
@@ -186,6 +190,7 @@ function submitQuote() {
   let quoteInput = document.getElementById("quote-input").value;
   localStorage.setItem("quote-input", quoteInput);
   updateMonthlyPayment();
+  $("#quoteModal").modal("hide");
 }
 
 // Get data from local storage.
