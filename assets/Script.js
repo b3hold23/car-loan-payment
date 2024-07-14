@@ -11,47 +11,90 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  // Validate the inputs with validation modal.
+  // Submit quote on quote modal save
+  document
+    .getElementById("submit-quote")
+    .addEventListener("click", submitQuote);
+
+  // Save quote on enter press
+  document
+    .getElementById("quote-input")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submitQuote();
+      }
+    });
+
   function validateForm(event) {
     let vehiclePriceInput = document
       .getElementById("vehicle-price")
-      .value.trim();
-    let downPaymentInput = document.getElementById("down-payment").value.trim();
+      .value.trim()
+      .replace(/[$,]/g, ""); // Remove $ and commas
+    let downPaymentInput = document
+      .getElementById("down-payment")
+      .value.trim()
+      .replace(/[$,]/g, ""); // Remove $ and commas
     let loanTermInput = document.getElementById("loan-term").value.trim();
 
+    // Check for empty vehicle price input
     if (vehiclePriceInput === "") {
       displayValidationModal("Please enter the Vehicle Price or MSRP.");
       return false;
     }
 
-    if (isNaN(vehiclePriceInput) || parseFloat(vehiclePriceInput) <= 0) {
+    // Check for non-positive numeric vehicle price
+    if (
+      isNaN(parseFloat(vehiclePriceInput)) ||
+      parseFloat(vehiclePriceInput) <= 0
+    ) {
       displayValidationModal(
         "Please enter a positive number without symbols for the Vehicle Price or MSRP."
       );
       return false;
     }
 
-    let formattedVehiclePrice = parseFloat(vehiclePriceInput).toFixed(2);
+    // Format and display vehicle price input
+    let formattedVehiclePrice = parseFloat(vehiclePriceInput).toLocaleString(
+      "en-US",
+      {
+        style: "currency",
+        currency: "USD",
+      }
+    );
     document.getElementById("vehicle-price").value = formattedVehiclePrice;
 
+    // Check for empty down payment input
     if (downPaymentInput === "") {
       displayValidationModal("Please enter the Down Payment or enter 0.");
       return false;
     }
 
-    if (isNaN(downPaymentInput) || parseFloat(downPaymentInput) < 0) {
+    // Check for non-positive numeric down payment
+    if (
+      isNaN(parseFloat(downPaymentInput)) ||
+      parseFloat(downPaymentInput) < 0
+    ) {
       displayValidationModal(
         "Please enter a positive number without symbols for the Down Payment."
       );
       return false;
     }
 
-    let formattedDownPayment = parseFloat(downPaymentInput).toFixed(2);
+    // Format and display down payment input
+    let formattedDownPayment = parseFloat(downPaymentInput).toLocaleString(
+      "en-US",
+      {
+        style: "currency",
+        currency: "USD",
+      }
+    );
     document.getElementById("down-payment").value = formattedDownPayment;
 
+    // Check for empty or non-positive numeric loan term
     if (
       loanTermInput === "" ||
-      isNaN(loanTermInput) ||
+      isNaN(parseFloat(loanTermInput)) ||
       parseFloat(loanTermInput) <= 0
     ) {
       displayValidationModal(
@@ -60,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     }
 
+    // Display loan term input without formatting
     document.getElementById("loan-term").value = parseFloat(loanTermInput);
 
     return true;
@@ -81,14 +125,27 @@ document.addEventListener("DOMContentLoaded", function () {
     let savedLoanTerm = localStorage.getItem("loan-term");
 
     if (savedVehiclePrice) {
-      document.getElementById("vehicle-price").value = savedVehiclePrice;
+      // Display formatted vehicle price
+      document.getElementById("vehicle-price").value = parseFloat(
+        savedVehiclePrice
+      ).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
     }
 
     if (savedDownPayment) {
-      document.getElementById("down-payment").value = savedDownPayment;
+      // Display formatted down payment
+      document.getElementById("down-payment").value = parseFloat(
+        savedDownPayment
+      ).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      });
     }
 
     if (savedLoanTerm) {
+      // Display loan term without formatting
       document.getElementById("loan-term").value = savedLoanTerm;
     }
 
@@ -143,6 +200,8 @@ document.addEventListener("DOMContentLoaded", function () {
     updateLoanTermValue();
     // Update local storage with the current slider value
     localStorage.setItem("loan-term", loanTermSlider.value);
+    // Update monthly payment and potential savings
+    updateMonthlyPayment();
   });
 
   // Update loan term value when the input field changes
@@ -150,6 +209,8 @@ document.addEventListener("DOMContentLoaded", function () {
     loanTermValueSpan.textContent = this.value;
     // Update local storage with the current input field value
     localStorage.setItem("loan-term", this.value);
+    // Update monthly payment and potential savings
+    updateMonthlyPayment();
   });
 });
 
@@ -159,21 +220,55 @@ function showMonthlyPaymentContainer() {
   container.style.display = "block";
 }
 
-// Function to show quote modal
 function showQuoteModal() {
   const quoteModal = new bootstrap.Modal(document.getElementById("quoteModal"));
+  let storedQuoteInput = localStorage.getItem("quote-input");
+  if (storedQuoteInput) {
+    document.getElementById("quote-input").value = storedQuoteInput;
+  }
   quoteModal.show();
 
   document
     .getElementById("submit-quote")
-    .addEventListener("click", submitQuote);
+    .addEventListener("click", function () {
+      let quoteInput = document.getElementById("quote-input").value.trim();
+
+      // Check if the input is a valid integer
+      if (!isValidInteger(quoteInput)) {
+        displayValidationModal(
+          "Please enter a valid integer for the Quote amount."
+        );
+        return;
+      }
+
+      // Save valid quote input to local storage
+      localStorage.setItem("quote-input", quoteInput);
+      updateMonthlyPayment();
+      $("#quoteModal").modal("hide");
+    });
+}
+
+// Helper function to check if a value is a valid integer
+function isValidInteger(value) {
+  // Check if the value is not empty and is a valid integer
+  return value !== "" && /^\d+$/.test(value);
+}
+
+// Helper function to check if a value is numeric
+function isNumeric(value) {
+  return !isNaN(parseFloat(value)) && isFinite(value);
 }
 
 // Save inputs to local storage.
 function submitInputs() {
-  let vehiclePrice = document.getElementById("vehicle-price").value;
-  let downPayment = document.getElementById("down-payment").value;
-  let loanTerm = document.getElementById("loan-term").value;
+  let vehiclePriceInput = document.getElementById("vehicle-price").value.trim();
+  let downPaymentInput = document.getElementById("down-payment").value.trim();
+  let loanTermInput = document.getElementById("loan-term").value.trim();
+
+  // Remove currency symbols and commas for storing raw numbers
+  let vehiclePrice = parseFloat(vehiclePriceInput.replace(/[$,]/g, "")) || 0;
+  let downPayment = parseFloat(downPaymentInput.replace(/[$,]/g, "")) || 0;
+  let loanTerm = parseFloat(loanTermInput) || 0;
 
   localStorage.setItem("vehicle-price", vehiclePrice);
   localStorage.setItem("down-payment", downPayment);
@@ -186,6 +281,7 @@ function submitQuote() {
   let quoteInput = document.getElementById("quote-input").value;
   localStorage.setItem("quote-input", quoteInput);
   updateMonthlyPayment();
+  $("#quoteModal").modal("hide");
 }
 
 // Get data from local storage.
@@ -202,17 +298,17 @@ function updateMonthlyPayment(quoteInput) {
   let monthlyPayment = (vehiclePrice - downPayment) / loanTerm;
   document.getElementById(
     "monthly-payment-display"
-  ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>$${monthlyPayment.toFixed(
-    2
+  ).innerHTML = `<b>Monthly Base Payment:</b> <br><br>${monthlyPayment.toLocaleString(
+    "en-US",
+    {
+      style: "currency",
+      currency: "USD",
+    }
   )} <br><br> at 0% p/m.`;
 
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
   let priceDifference = 0;
-
-  let differenceDisplay = `Potential savings: <br><br><b>$${priceDifference.toFixed(
-    2
-  )} p/m. </b>`;
 
   if (!isNaN(quote) && quote > 0) {
     priceDifference = quote - monthlyPayment;
@@ -220,7 +316,11 @@ function updateMonthlyPayment(quoteInput) {
 
   document.getElementById(
     "monthly-difference-display"
-  ).innerHTML = `Potential savings: <br><br><b>$${priceDifference.toFixed(
-    2
+  ).innerHTML = `Potential savings: <br><br><b>${priceDifference.toLocaleString(
+    "en-US",
+    {
+      style: "currency",
+      currency: "USD",
+    }
   )} p/m. </b>`;
 }

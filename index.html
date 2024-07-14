@@ -60,21 +60,21 @@
     <main class="main">
       <form class="form px-4 py-3">
         <div class="mb-3">
-          <label for="vehicle-price">Vehicle Price or MSRP ($):</label>
+          <label for="vehicle-price">Vehicle Price or MSRP:</label>
           <input
             type="text"
             class="vehicle-price center-form-input"
             id="vehicle-price"
-            placeholder="48000"
+            placeholder="$48,000"
           />
         </div>
         <div class="mb-3">
-          <label for="down-payment">Down Payment ($):</label>
+          <label for="down-payment">Down Payment:</label>
           <input
             type="text"
             class="down-payment center-form-input"
             id="down-payment"
-            placeholder="9600"
+            placeholder="$9,600"
           />
         </div>
         <div class="mb-3">
@@ -190,15 +190,14 @@
             </div>
             <div class="modal-body">
               <p>
-                Submitting a third-party quote will help you compare and save.
+                Submitting a third-party quote will help you compare and potentially save on your financing.
               </p>
               <p>
-                Please ensure the Vehicle Price, Down Payment, and Loan Term for the quote are
-                the same as the figures you just submitted.
+                Please ensure that the Vehicle Price, Down Payment, and Loan Term for the quote match the figures you have just submitted.
               </p>
               <form id="quote-form">
                 <label for="quote-input">Quote ($):</label>
-                <input type="text" class="quote-input" id="quote-input" /> <br />
+                <input type="number" id="quote-input" name="quote-input" min="0" step="1" required>
             </div>
             <div class="modal-footer">
               <button
@@ -206,7 +205,7 @@
                 class="btn btn-secondary"
                 data-bs-dismiss="modal"
               >
-                Close
+                No thanks
               </button>
               <button type="button" class="btn btn-primary" id="submit-quote">Save</button>
             </div>
