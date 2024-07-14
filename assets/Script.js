@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let tipsElement = document.createElement("p");
     tipsElement.setAttribute("id", "show-tips");
-    tipsElement.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax.`;
+    tipsElement.textContent = `Check the market adjustment, loan charges, add-ons, dealer fees, service charges, registration fees, and sales tax before purchasing the vehicle.`;
     tipsContainer.appendChild(tipsElement);
   }
 
@@ -304,7 +304,7 @@ function updateMonthlyPayment(quoteInput) {
       style: "currency",
       currency: "USD",
     }
-  )} <br><br> at 0% p/m.`;
+  )} <br><br> at 0% p/m <br> (and no markup).`;
 
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
@@ -316,7 +316,7 @@ function updateMonthlyPayment(quoteInput) {
 
   document.getElementById(
     "monthly-difference-display"
-  ).innerHTML = `Potential savings: <br><br><b>${priceDifference.toLocaleString(
+  ).innerHTML = `You could save up to: <br><br><b>${priceDifference.toLocaleString(
     "en-US",
     {
       style: "currency",
