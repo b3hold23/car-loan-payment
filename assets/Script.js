@@ -220,7 +220,6 @@ function showMonthlyPaymentContainer() {
   container.style.display = "block";
 }
 
-// Function to show quote modal
 function showQuoteModal() {
   const quoteModal = new bootstrap.Modal(document.getElementById("quoteModal"));
   let storedQuoteInput = localStorage.getItem("quote-input");
@@ -231,7 +230,33 @@ function showQuoteModal() {
 
   document
     .getElementById("submit-quote")
-    .addEventListener("click", submitQuote);
+    .addEventListener("click", function () {
+      let quoteInput = document.getElementById("quote-input").value.trim();
+
+      // Check if the input is a valid integer
+      if (!isValidInteger(quoteInput)) {
+        displayValidationModal(
+          "Please enter a valid integer for the Quote amount."
+        );
+        return;
+      }
+
+      // Save valid quote input to local storage
+      localStorage.setItem("quote-input", quoteInput);
+      updateMonthlyPayment();
+      $("#quoteModal").modal("hide");
+    });
+}
+
+// Helper function to check if a value is a valid integer
+function isValidInteger(value) {
+  // Check if the value is not empty and is a valid integer
+  return value !== "" && /^\d+$/.test(value);
+}
+
+// Helper function to check if a value is numeric
+function isNumeric(value) {
+  return !isNaN(parseFloat(value)) && isFinite(value);
 }
 
 // Save inputs to local storage.
@@ -284,14 +309,6 @@ function updateMonthlyPayment(quoteInput) {
   // Calculate potential savings.
   let quote = parseFloat(localStorage.getItem("quote-input")) || 0;
   let priceDifference = 0;
-
-  let differenceDisplay = `Potential savings: <br><br><b>${priceDifference.toLocaleString(
-    "en-US",
-    {
-      style: "currency",
-      currency: "USD",
-    }
-  )} p/m. </b>`;
 
   if (!isNaN(quote) && quote > 0) {
     priceDifference = quote - monthlyPayment;
